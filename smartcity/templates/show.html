@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Location data
+{% endblock %}
+
+{% block main %}
+
+<div class="container-fluid mb-0 text-center align-items-center">
+    <h1>Location Data</h1>
+    <form action="/show" method="post" class="d-flex">
+        <input required autocomplete="off" class="form-control me-2" type="search" placeholder="Your City" name="city_show">
+        <button class="btn btn-outline-success" type="submit">Show</button>
+    </form>
+    {% if items %}
+        {% for item in items %}
+            <br>
+            <strong>Title:</strong> {{ item.title }}<br>
+            <strong>Address:</strong> {{ item.address.label }}<br>
+            <strong>Latitude:</strong> {{ item.position.lat }}<br>
+            <strong>Longitude:</strong> {{ item.position.lng }}<br>
+            <strong>Accuracy:</strong> {{ item.scoring.queryScore * 100 }}%
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No data found.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,94 @@
+#navbar {
+    background-color: rgb(43, 235, 136);
+}
+.fixed-top {
+    position: fixed;
+}
+#traffic-info {
+    margin-top: 5px;
+    width: auto;
+}
+
+#other_routes{
+    background-color: #888;
+    position:absolute;
+    width: 90%;
+}
+
+#live {
+    color: red;
+}
+
+#map {
+    height: 400px;
+    width: 90%;
+    border: 1px solid black;
+}
+
+#traffic-data {
+    width: 90%;
+    height: 400px;
+    float: right;
+    overflow-y: auto;
+    border: 1px solid black;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+@media (min-width: 768px) {
+    #map {
+        width: 55%;
+        height: 500px;
+    }
+    #traffic-data {
+        height: 500px;
+        width: 40%;
+        margin-left: 0px;
+    }
+    #other_routes {
+        width: 40%;
+    }
+}
+
+.borderless {
+    border: 0;
+}
+
+body {
+    padding-top: 56px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 5px;
+}
+.wrapper {
+    flex: 1;
+}
+
+/* #footjob {
+    margin-bottom: 1px;
+    display: flex;
+    justify-items:flex-end ;
+    margin-top:;
+} */
+
+.cc {
+    background-color: rgb(197, 197, 197);
+    color: gray;
+}
+
+.responsive-image {
+    max-width: 100%;
+}
+
+.logo-img {
+    max-width: 100px; /* Adjust the max-width to your desired size */
+    height: auto; /* Ensures the image maintains its aspect ratio */
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #888  white;
+}
+

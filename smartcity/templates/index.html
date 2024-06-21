@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Project Vision
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <div class="clearfix">
+        <img id="image1" class="img-fluid p-2 col-sm-5 float-sm-end mb-3 ms-sm-3 p-2"
+            src="{{ url_for('static', filename='pictures/image1.jpg') }}" alt="smart city vector">
+        <h1 class="display-4">Smart Traffic Management</h1>
+        <h2 id="head1">Enhancing Urban Mobility</h2>
+        <p class="lead">Our advanced traffic management system leverages real-time data to provide dynamic traffic
+            monitoring and improve urban mobility.</p>
+
+        <ul>
+            <li>
+                <h5>Real-Time Traffic Data</h5>
+                <p>Monitor live traffic conditions using real-time data from the HERE API. Our system displays traffic
+                    status
+                    within a customizable radius, up to 10 km, on an interactive map.
+                </p>
+            </li>
+            <li>
+                <h5>Interactive Traffic Map</h5>
+                <p>The interactive map shows traffic conditions using polylines, allowing users to see congestion levels
+                    and
+                    traffic flow. By default, the system shows traffic within a 1 km radius, which can be adjusted as
+                    needed.
+                </p>
+            </li>
+            <li>
+                <h5>Comprehensive Traffic Analysis</h5>
+                <p>Get detailed information on nearby routes, including live feed data, route names, business relevance,
+                    and jam
+                    factors. This data helps users make informed decisions about their commute and travel plans.
+                </p>
+            </li>
+        </ul>
+        <h3>Leading in Smart Traffic Solutions</h3>
+        <p>
+            Our commitment to innovation in traffic management ensures that we stay ahead of urban challenges. We
+            integrate the latest advancements in data analytics and automation to provide efficient and effective
+            traffic solutions. Our team continually researches and collaborates with industry leaders to enhance our
+            system and deliver cutting-edge traffic management capabilities.
+        </p>
+    </div>
+</div>
+{% endblock %}
