@@ -1,11 +1,7 @@
 {% extends "layout.html" %}
 
 {% block script %}
-<style>
-    .container {
-        border: none !important;
-    }
-</style>
+
 {% endblock %}
 
 {% block title %}
@@ -19,15 +15,15 @@ Profile
 {% if session['username'] == username %}
 <form action="/profile" style="border: 0;" id="NameChange" method="post" class="form-control w-auto mx-auto mt-3 p-2">
     <div class="container">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-auto">
+        <div class="row justify-content-center">
+            <div class="d-flex col-auto align-items-center">
                 <label for="username">Change username:</label>
             </div>
-            <div class="col-auto">
+            <div class="d-flex col-auto align-items-center">
                 <input required autocomplete="off" maxlength="20" class="form-control" type="text" id="NewName"
                     name="NewName" value="{{ request.form.get('NewName', '') }}" placeholder="Username">
             </div>
-            <div class="col-auto">
+            <div class="d-flex py-3 col-auto align-items-center">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>
@@ -46,15 +42,15 @@ Profile
 {% endwith %}
 <form action="/profile" style="border: 0;" id="NameChange" method="post" class="form-control w-auto mx-auto mt-3 p-2">
     <div class="container">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-auto">
+        <div class="row justify-content-center">
+            <div class="d-flex col-auto align-items-center">
                 <label for="password">Change Password:</label>
             </div>
-            <div class="col-auto">
+            <div class="d-flex col-auto align-items-center">
                 <input required autocomplete="off" minlength="6" class="form-control" type="password" id="NewPass"
                     name="NewPass" value="{{ request.form.get('NewPass', '') }}" placeholder="Password">
             </div>
-            <div class="col-auto">
+            <div class="d-flex py-3 col-auto align-items-center">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>
