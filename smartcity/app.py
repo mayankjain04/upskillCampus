@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, jsonify, session
+from flask import Flask, render_template, redirect, request, url_for, jsonify, session, flash
 from flask_session import Session
 import requests
 from contextlib import contextmanager
@@ -198,12 +198,15 @@ def get_traffic_data():
         })
         for link in shape_links:
             points = link.get('points', [])
-            length = link.get('length', 0)
+            # length = link.get('length', 0)
             coordinates = [[point['lat'], point['lng']] for point in points]
             
             traffic_data[0]['flows'].append({
                 'coordinates': coordinates,
-                'length': length,
+                # 'length': length,
+                'routeName': description,
+                'routeLength': routelength,
+                'jamStatus': jamFactor,
             })
     return jsonify({'Results': traffic_data})
 
@@ -229,6 +232,22 @@ def show():
 @app.route('/see')
 def see():
     return render_template('see.html')
+
+@app.route('/documentation')
+def documentation():
+    return render_template('documentation.html')
+
+@app.route('/support')
+def support():
+    if request.method=='POST':
+            with get_db_connection() as connection:
+                with connection.cursor(pymysql.cursors.DictCursor) as cursor:  # Use DictCursor to get dictionaries instead of tuples
+                    db.execute("INSERT INTO feedback (username, feedback) VALUES(%s, %s)", (session.get('username'), request.form.get('feedback')))
+                    connection.commit()
+                    flash('Response submitted successfully!', 'success')
+                    return redirect("/support")
+    else:
+        return render_template("support.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

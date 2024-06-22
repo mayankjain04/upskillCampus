@@ -46,13 +46,13 @@
                             <a class="nav-link active" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Documentation</a>
+                            <a class="nav-link active" href="/documentation">Documentation</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" id="traffic-link" href="#">Traffic</a>
+                            <a class="nav-link active trigger-event" id="traffic-link" href="#">Traffic</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Support</a>
+                            <a class="nav-link active" href="/support">Support</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -167,9 +167,11 @@
             window.location.href = "/traffic";
         }
         // end
-        document.getElementById('traffic-link').addEventListener('click', function (event) {
+        document.querySelectorAll('.trigger-event').forEach(function(element) {
+            element.addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the default link behavior
             getLocation(); // Call the getLocation function
+            });
         });
     </script>
     {% block scripttag %}

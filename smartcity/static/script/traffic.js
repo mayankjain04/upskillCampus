@@ -36,10 +36,37 @@ fetch(`/traffic_data?latitude=${latitude}&longitude=${longitude}&radius=${radius
             // Access the 'flows' key within the first element of 'Results'
             traffic_data.flows.forEach(flow => {
                 var coordinates = flow.coordinates;
-                var length = flow.length; // Optional: Use this for additional features
-                var polyline = L.polyline(coordinates, { color: 'red' }).addTo(map);
-                // Optional: Add length or other info as a tooltip or popup
-                polyline.bindTooltip(`Length: ${length} meters`);
+                var length = flow.length; 
+                var routeName = flow.routeName;
+                var routeLength = flow.routeLength;
+                var jamFactor = flow.jamStatus;
+                var color = "grey";
+                var message = "Info Unavailable";
+                switch (true) {
+                    case (jamFactor === 10):
+                        color = "red";
+                        message = "Closed";
+                        break;
+                    case (jamFactor < 3):
+                        color = "green";
+                        message = "Open";
+                        break;
+                    case (jamFactor < 6):
+                        color = "#9ACD32";
+                        message = "Slight Traffic";
+                        break;
+                    case (jamFactor < 8):
+                        color = "yellow";
+                        message = "Moderate Traffic";
+                        break;
+                    case (jamFactor < 10):
+                        color = "orange";
+                        message = "High Traffic";
+                        break;
+                }
+                // at first on `Length: ${length} meters`, was added in tooltip
+                var polyline = L.polyline(coordinates, { color: color }).addTo(map);
+                polyline.bindTooltip(`${routeName}, ${routeLength} meters, ${message}`);
             });
             traffic_data.routeData.forEach(route => {
                 // Add additional data beside the map

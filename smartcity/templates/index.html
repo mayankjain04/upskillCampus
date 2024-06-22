@@ -7,10 +7,12 @@ Project Vision
 {% block main %}
 <div class="container-fluid">
     <div class="clearfix">
+        <h1 class="display-4 d-block d-sm-none">Smart Traffic Management</h1>
+        <h2 id="head1">Enhancing Urban Mobility</h2>
+
         <img id="image1" class="img-fluid p-2 col-sm-5 float-sm-end mb-3 ms-sm-3 p-2"
             src="{{ url_for('static', filename='pictures/image1.jpg') }}" alt="smart city vector">
-        <h1 class="display-4">Smart Traffic Management</h1>
-        <h2 id="head1">Enhancing Urban Mobility</h2>
+        <h1 class="display-4 d-none d-sm-block">Smart Traffic Management</h1>
         <p class="lead">Our advanced traffic management system leverages real-time data to provide dynamic traffic
             monitoring and improve urban mobility.</p>
 
@@ -38,6 +40,7 @@ Project Vision
                 </p>
             </li>
         </ul>
+        <h5 class="ms-md-4 ms-sm-3"><a class="link trigger-event">Launch Traffic Monitoring System</a></h5>
         <h3>Leading in Smart Traffic Solutions</h3>
         <p>
             Our commitment to innovation in traffic management ensures that we stay ahead of urban challenges. We
