@@ -30,7 +30,6 @@ def get_connection():
             db.close()
         connection.close()
  
-# Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -49,7 +48,7 @@ def login():
             username = request.form.get("username")
             password = request.form.get("password")
             with get_connection() as connection:
-                with connection.cursor(pymysql.cursors.DictCursor) as cursor:  # Use DictCursor to get dictionaries instead of tuples
+                with connection.cursor(pymysql.cursors.DictCursor) as cursor:  
                     cursor.execute("SELECT user_id, pw_hash FROM users WHERE username = %s", (username,))
                     result = cursor.fetchone()
                     if not result:
@@ -78,7 +77,7 @@ def register():
             if not confirmation == password:
                 return render_template("register.html", message="passwords do not match")
             with get_connection() as connection:
-                with connection.cursor(pymysql.cursors.DictCursor) as cursor:  # Use DictCursor to get dictionaries instead of tuples
+                with connection.cursor(pymysql.cursors.DictCursor) as cursor:  
                     cursor.execute("SELECT user_id FROM users WHERE username = %s", (username,))
                     result = cursor.fetchone()
                     if result:
@@ -100,7 +99,7 @@ def profile():
         if request.method=='POST':
             NewName = request.form.get('NewName')
             with get_connection() as connection:
-                with connection.cursor(pymysql.cursors.DictCursor) as cursor:  # Use DictCursor to get dictionaries instead of tuples
+                with connection.cursor(pymysql.cursors.DictCursor) as cursor: 
                     if NewName:
                         cursor.execute("SELECT user_id FROM users WHERE username = %s", (NewName,))
                         result = cursor.fetchone()
@@ -127,12 +126,10 @@ def save_location():
     data = request.get_json()
     session['latitude'] = data['latitude']
     session['longitude'] = data['longitude']
-
-    # Process the location data (e.g., save to database, perform some action, etc.)
     print(f"Received location: Latitude = {session['latitude']}, Longitude = {session['longitude']}")
     if session.get("user_id", ''):
         with get_connection() as connection:
-            with connection.cursor(pymysql.cursors.DictCursor) as cursor:  # Use DictCursor to get dictionaries instead of tuples
+            with connection.cursor(pymysql.cursors.DictCursor) as cursor:  
                 cursor.execute("UPDATE USERS SET latitude = %s, longitude = %s WHERE user_id = %s", (session.get("latitude"), session.get("longitude"), session.get("user_id"),))
                 connection.commit()
     return jsonify({"message": "Location saved successfully"}), 200
@@ -148,7 +145,7 @@ def traffic():
         lat = session.get("latitude", 28.63097)
         lng = session.get("longitude", 77.2172)
         radius = 1000
-        print(session.get("latitude", 'default'))
+        print(f"session data stored: latitude: {session.get("latitude", 'None')}, longitude: {session.get("longitude", "None")}")
     return render_template('traffic.html', latitude=lat, longitude=lng, radius=radius)
 
 # the below code belongs to /traffic_data and produces error encoding characters like : and , into the link. maybe someone will fix it
@@ -165,8 +162,7 @@ def get_traffic_data():
     latitude = request.args.get('latitude', session.get('latitude', 0))
     longitude = request.args.get('longitude', session.get('longitude', 0))
     radius = request.args.get('radius', 1000)
-    endpoint = f'https://data.traffic.hereapi.com/v7/flow'
-    url = f'{endpoint}?in=circle:{latitude},{longitude};r={radius}&locationReferencing=shape&apiKey={API_KEY}'
+    url = f'https://data.traffic.hereapi.com/v7/flow?in=circle:{latitude},{longitude};r={radius}&locationReferencing=shape&apiKey={API_KEY}'
     print(f"Traffic Request URL: {url}")
     response = requests.get(url)
     data = response.json()
@@ -215,12 +211,9 @@ def show():
     if request.method=='POST':
         location = request.form.get('city_show', "India")
         # Make a request to the HERE API
-        url = f'https://geocode.search.hereapi.com/v1/geocode'
-        params = {
-            'q': location,
-            'apiKey': API_KEY
-        }
-        response = requests.get(url, params=params)
+        url = f'https://geocode.search.hereapi.com/v1/geocode?q={location}&apiKey={API_KEY}'
+        response = requests.get(url)
+        print(f"Here request from /show route: {url}")
         if response.status_code == 200:
             data = response.json()
             return render_template("show.html", items=data.get('items', []))
@@ -241,7 +234,7 @@ def documentation():
 def support():
     if request.method=='POST':
             with get_connection() as connection:
-                with connection.cursor(pymysql.cursors.DictCursor) as cursor:  # Use DictCursor to get dictionaries instead of tuples
+                with connection.cursor(pymysql.cursors.DictCursor) as cursor:  
                     cursor.execute("INSERT INTO feedback (username, feedback) VALUES(%s, %s)", (session.get('username'), request.form.get('feedback')))
                     connection.commit()
                     flash('Response submitted successfully!', 'success')

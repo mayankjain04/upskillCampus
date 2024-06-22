@@ -13,7 +13,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Add a circle to indicate the radius of the area
-var radius = dataRadius; // 500 meters
+var radius = dataRadius; 
 L.circle([latitude, longitude], {
     color: 'blue',
     fillColor: '#blue',
@@ -40,6 +40,7 @@ fetch(`/traffic_data?latitude=${latitude}&longitude=${longitude}&radius=${radius
                 var routeName = flow.routeName;
                 var routeLength = flow.routeLength;
                 var jamFactor = flow.jamStatus;
+                // select color for polylines
                 var color = "grey";
                 var message = "Info Unavailable";
                 switch (true) {
@@ -64,7 +65,7 @@ fetch(`/traffic_data?latitude=${latitude}&longitude=${longitude}&radius=${radius
                         message = "High Traffic";
                         break;
                 }
-                // at first on `Length: ${length} meters`, was added in tooltip
+                // at first only `Length: ${length} meters`, was added in tooltip
                 var polyline = L.polyline(coordinates, { color: color }).addTo(map);
                 polyline.bindTooltip(`${routeName}, ${routeLength} meters, ${message}`);
             });

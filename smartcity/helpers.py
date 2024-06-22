@@ -28,6 +28,6 @@ def searchAddress(address):
                 add = address.get("label")
                 code = address.get("postalCode")
                 return lat, lng, add, code
-            return None, None, None, None  # or handle the error as needed
+            return None, None, None, None
         else:
             return f"Error: {response.status_code}"

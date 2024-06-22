@@ -1,6 +1,25 @@
-#navbar {
-    background-color: rgb(43, 235, 136);
+.zerospace {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    padding-top: 0;
 }
+
+.logo-img {
+    max-width: 170px; 
+    height: auto;
+}
+
+.navbar-brand {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#navbar {
+    background-color: #234E70;
+}
+
+
 .fixed-top {
     position: fixed;
 }
@@ -66,12 +85,6 @@ body {
     flex: 1;
 }
 
-/* #footjob {
-    margin-bottom: 1px;
-    display: flex;
-    justify-items:flex-end ;
-    margin-top:;
-} */
 
 .cc {
     background-color: rgb(197, 197, 197);
@@ -80,11 +93,6 @@ body {
 
 .responsive-image {
     max-width: 100%;
-}
-
-.logo-img {
-    max-width: 100px; /* Adjust the max-width to your desired size */
-    height: auto; /* Ensures the image maintains its aspect ratio */
 }
 
 html {

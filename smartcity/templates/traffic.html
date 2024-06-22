@@ -5,7 +5,7 @@ Project Vision
 {% endblock %}
 
 {% block main %}
-<h1 class="text-center">Traffic Map</h1>
+<h1 class="text-center mt-3">Traffic Map</h1>
 <p class="container-fluid px-5 fst-italic">Showing search results for <span class="text-primary">{{(code+", ") if code}}{{label if label else "your location" if session["latitude"] else "India"}}</span></p>
 <div class="container-fluid pb-2">
     <div class="row align-items-center justify-content-center">
